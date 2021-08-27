@@ -20,45 +20,44 @@ function runIt() {
 function showStatistics(allValues, badValues, lowerBoundary, higherBoundary) {
     // your code here 
     // 1  
-    const goodValues = allValues.filter((item) => {
-        if (item > lowerBoundary && item < higherBoundary && !badValues.some(val => val === item))
-            return item;
-    });
+    const goodValues = allValues.filter((item) =>( 
+        (item > lowerBoundary) && (item < higherBoundary) && (!badValues.includes(item))));
     console.log(`удовлетворяют условию: ${goodValues}`);
     
-
     // 2
     const averageValue = goodValues.reduce((sum, current) => sum + current) / goodValues.length;
     console.log(`Среднеарифметическое: ${averageValue.toFixed(2)}`);
 
     // 3
-    const sortValue = goodValues.sort((a, b) => a - b);
-    console.log(`sortValue ${sortValue}`);
+    const sortValues = goodValues.slice();
+    sortValues.sort((a, b) => a - b);
+    console.log(`sortValue ${sortValues}`);
 
-    if (goodValues.length % 2) {
-        console.log(`Средний элемент ${sortValue[Math.floor(sortValue.length / 2)]}`);
+    if (sortValues.length % 2) {
+        console.log(`Средний элемент ${sortValues[(sortValues.length -1)/ 2]}`);
     } else {
-           const m = (((sortValue[sortValue.length / 2 - 1]) + (sortValue[sortValue.length / 2]))/2);
+           const m = (((sortValues[sortValues.length / 2 - 1]) + (sortValues[sortValues.length / 2]))/2);
        console.log(`Средниe  значение  ${m}`);
     }
 
     // 4 
-let oddValue = [],
-    evenValue = [];
+const oddValues = [];
+   let evenValues = [];
 
     goodValues.forEach(elem => {
         if (elem%2) {
-            oddValue.push(elem);
+            oddValues.push(elem);
         } else {
-            evenValue.push(elem);
+            evenValues.push(elem);
         }
     });
 
-    if (oddValue.length > evenValue.length) console.log('Нечетных больше');
-    if (oddValue.length < evenValue.length) console.log('Четных больше');
-    if (oddValue.length === evenValue.length) console.log('Нечетных и Четных поровну');
-    console.log(oddValue);
-    console.log(evenValue);
+    if (oddValues.length > evenValues.length) console.log('Нечетных больше'); 
+    else  if (oddValues.length < evenValues.length) console.log('Четных больше');
+    else console.log('Нечетных и Четных поровну');
+    console.log(oddValues);
+    console.log(evenValues);
+    console.log(`goodValues ${goodValues}`);
 
 }
 
